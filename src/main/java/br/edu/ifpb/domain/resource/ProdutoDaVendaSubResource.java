@@ -1,5 +1,9 @@
-package br.edu.ifpb.domain.model;
+package br.edu.ifpb.domain.resource;
 
+import br.edu.ifpb.domain.model.Produto;
+import br.edu.ifpb.domain.model.Venda;
+import br.edu.ifpb.domain.service.Vendas;
+import br.edu.ifpb.domain.service.Produtos;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,7 +29,7 @@ public class ProdutoDaVendaSubResource {
     private Vendas service;
 
     @EJB
-    private Produtos produtos;
+   private Produtos produtos;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

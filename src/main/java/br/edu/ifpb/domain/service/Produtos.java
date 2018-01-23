@@ -1,5 +1,6 @@
-package br.edu.ifpb.domain.model;
+package br.edu.ifpb.domain.service;
 
+import br.edu.ifpb.domain.model.Produto;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

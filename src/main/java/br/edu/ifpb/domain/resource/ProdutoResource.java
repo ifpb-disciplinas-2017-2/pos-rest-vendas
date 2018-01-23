@@ -1,4 +1,4 @@
-package br.edu.ifpb.domain.model;
+package br.edu.ifpb.domain.resource;
 
 import java.net.URI;
 import java.util.List;
@@ -15,6 +15,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import br.edu.ifpb.domain.model.Produto;
+import br.edu.ifpb.domain.service.Produtos;
 
 /**
  * @author Ricardo Job

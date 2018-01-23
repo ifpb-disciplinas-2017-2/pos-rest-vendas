@@ -1,5 +1,8 @@
-package br.edu.ifpb.domain.model;
+package br.edu.ifpb.domain.resource;
 
+import br.edu.ifpb.domain.model.Venda;
+import br.edu.ifpb.domain.service.Produtos;
+import br.edu.ifpb.domain.service.Vendas;
 import java.net.URI;
 import java.util.List;
 import javax.ejb.EJB;

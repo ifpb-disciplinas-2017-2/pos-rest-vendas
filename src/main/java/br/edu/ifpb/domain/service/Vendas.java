@@ -1,9 +1,10 @@
-package br.edu.ifpb.domain.model;
+package br.edu.ifpb.domain.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import br.edu.ifpb.domain.model.Venda;
 
 /**
  *
