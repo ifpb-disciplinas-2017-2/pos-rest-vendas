@@ -60,6 +60,11 @@ public class VendaResource {
     @Path("{id}")
     public Response listarVenda(@PathParam("id") int id) {
         Venda retorno = service.vendaCom(id);
+
+        if (retorno == null) {
+            String mensagem = "{ \"msg\": \"resource not found\"}";
+            return Response.status(Response.Status.NOT_FOUND).entity(mensagem).build();
+        }
         return Response.ok()
                 .entity(retorno)
                 .build();
@@ -72,17 +77,17 @@ public class VendaResource {
     }
 
 //    @PUT
-    @Path("{id}/produtos/{idProduto}")
-    public ProdutoDaVendaSubResource adicionarProdutoAVenda() {
-        return resourceContext.getResource(ProdutoDaVendaSubResource.class);
-//        Venda venda = service.vendaCom(id);
-//        Produto produto = produtos.produtoCom(idProduto);
-//        venda.novo(produto);
-//
-//        Venda retorno = service.atualizar(venda);
-//
-//        return Response.ok()
-//                .entity(retorno)
-//                .build();
-    }
+//    @Path("{id}/produtos/{idProduto}")
+//    public ProdutoDaVendaSubResource adicionarProdutoAVenda() {
+//        return resourceContext.getResource(ProdutoDaVendaSubResource.class);
+////        Venda venda = service.vendaCom(id);
+////        Produto produto = produtos.produtoCom(idProduto);
+////        venda.novo(produto);
+////
+////        Venda retorno = service.atualizar(venda);
+////
+////        return Response.ok()
+////                .entity(retorno)
+////                .build();
+//    }
 }
