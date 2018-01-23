@@ -6,10 +6,10 @@ import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -25,6 +25,9 @@ import javax.ws.rs.core.UriInfo;
 @Path("venda")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class VendaResource {
+
+    @Context
+    private ResourceContext resourceContext;
 
     @EJB
     private Vendas service;
@@ -62,32 +65,24 @@ public class VendaResource {
                 .build();
     }
 
-    @GET
+//    @GET
     @Path("{id}/produtos")
-    public Response produtosDaVenda(@PathParam("id") int id) {
-        Venda venda = service.vendaCom(id);
-
-        GenericEntity<List<Produto>> retorno = new GenericEntity<List<Produto>>(venda.getProdutos()) {
-        };
-
-        return Response.ok()
-                .entity(retorno)
-                .build();
+    public ProdutoDaVendaSubResource produtosDaVenda() {
+        return resourceContext.getResource(ProdutoDaVendaSubResource.class);
     }
 
-    @PUT
+//    @PUT
     @Path("{id}/produtos/{idProduto}")
-    public Response adicionarProdutoAVenda(@PathParam("id") int id,
-            @PathParam("idProduto") int idProduto) {
-
-        Venda venda = service.vendaCom(id);
-        Produto produto = produtos.produtoCom(idProduto);
-        venda.novo(produto);
-
-        Venda retorno = service.atualizar(venda);
-
-        return Response.ok()
-                .entity(retorno)
-                .build();
+    public ProdutoDaVendaSubResource adicionarProdutoAVenda() {
+        return resourceContext.getResource(ProdutoDaVendaSubResource.class);
+//        Venda venda = service.vendaCom(id);
+//        Produto produto = produtos.produtoCom(idProduto);
+//        venda.novo(produto);
+//
+//        Venda retorno = service.atualizar(venda);
+//
+//        return Response.ok()
+//                .entity(retorno)
+//                .build();
     }
 }

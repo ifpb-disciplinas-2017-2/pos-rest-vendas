@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
  */
 @Stateless
 @Path("")
-public class VendaSubResource {
+public class ProdutoDaVendaSubResource {
 
     @EJB
     private Vendas service;
@@ -26,7 +26,6 @@ public class VendaSubResource {
     private Produtos produtos;
 
     @GET
-    @Path("{id}/produtos")
     public Response produtosDaVenda(@PathParam("id") int id) {
         Venda venda = service.vendaCom(id);
 
@@ -39,7 +38,6 @@ public class VendaSubResource {
     }
 
     @PUT
-    @Path("{id}/produtos/{idProduto}")
     public Response adicionarProdutoAVenda(@PathParam("id") int id,
             @PathParam("idProduto") int idProduto) {
 
