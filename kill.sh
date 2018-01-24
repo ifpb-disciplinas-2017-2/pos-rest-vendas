@@ -1,0 +1,4 @@
+echo "\n1 - PARANDO E REMOVENDO CONTAINERS; EXCLUINDO IMAGENS DOCKER..."
+docker-compose down
+echo "\n2 - REMOVENDO BINÁRIO DO PROJETO"
+mvn clean
