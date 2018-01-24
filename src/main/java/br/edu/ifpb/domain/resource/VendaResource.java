@@ -78,6 +78,11 @@ public class VendaResource {
     public ProdutoDaVendaSubResource produtosDaVenda() {
         return resourceContext.getResource(ProdutoDaVendaSubResource.class);
     }
+    
+    @Path("{id}/cliente")
+    public ClienteVendaSubResource clienteDaVenda() {
+        return resourceContext.getResource(ClienteVendaSubResource.class);
+    }
 
 //    @PUT
 //    @Path("{id}/produtos/{idProduto}")

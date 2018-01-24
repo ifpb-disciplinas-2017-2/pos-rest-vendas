@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,6 +31,9 @@ public class Venda implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdIn;
+    
+    @OneToOne
+    private Cliente cliente;
 
     public Venda() {
         this(new ArrayList<Produto>());
@@ -68,4 +72,12 @@ public class Venda implements Serializable {
         this.produtos = produtos;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
 }

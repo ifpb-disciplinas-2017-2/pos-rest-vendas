@@ -29,14 +29,15 @@ public class ProdutoDaVendaSubResource {
     private Vendas service;
 
     @EJB
-   private Produtos produtos;
+    private Produtos produtos;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response produtosDaVenda(@PathParam("id") int id) {
         Venda venda = service.vendaCom(id);
 
-        GenericEntity<List<Produto>> retorno = new GenericEntity<List<Produto>>(venda.getProdutos()) {
+        GenericEntity<List<Produto>> retorno = new GenericEntity
+                <List<Produto>>(venda.getProdutos()) {
         };
 
         return Response.ok()
