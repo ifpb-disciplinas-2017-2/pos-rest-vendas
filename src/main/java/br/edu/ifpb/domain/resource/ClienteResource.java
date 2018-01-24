@@ -43,10 +43,14 @@ public class ClienteResource {
     }
     
     @GET
-    @Path("{id}")
+    @Path("{cpf}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public void recuperarUm(@PathParam("id") int id) {
+    public Response recuperarUm(@PathParam("cpf") String cpf) {
+        Cliente retorno = service.comCpf(cpf);
         
+        return Response.ok()
+                .entity(retorno)
+                .build();
     }
     
     @POST
