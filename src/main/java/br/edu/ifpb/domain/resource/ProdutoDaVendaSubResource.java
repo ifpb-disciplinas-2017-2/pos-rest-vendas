@@ -32,9 +32,9 @@ public class ProdutoDaVendaSubResource {
     private Produtos produtos;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response produtosDaVenda(@PathParam("id") int id) {
-        Venda venda = service.vendaCom(id);
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response produtosDaVenda(@PathParam("idVenda") int idVenda) {
+        Venda venda = service.vendaCom(idVenda);
 
         GenericEntity<List<Produto>> retorno = new GenericEntity
                 <List<Produto>>(venda.getProdutos()) {
@@ -47,11 +47,11 @@ public class ProdutoDaVendaSubResource {
 
     @PUT
     @Path("{idProduto}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response adicionarProdutoAVenda(@PathParam("id") int id,
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response adicionarProdutoAVenda(@PathParam("idVenda") int idVenda,
             @PathParam("idProduto") int idProduto) {
 
-        Venda venda = service.vendaCom(id);
+        Venda venda = service.vendaCom(idVenda);
         Produto produto = produtos.produtoCom(idProduto);
         venda.novo(produto);
 

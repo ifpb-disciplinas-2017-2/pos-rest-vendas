@@ -6,6 +6,7 @@ import br.edu.ifpb.domain.service.Vendas;
 import java.net.URI;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,8 +26,9 @@ import javax.ws.rs.core.UriInfo;
  * @mail miolivc@outlook.com
  * @since 23/01/2018
  */
+@Stateless
 @Path("venda")
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class VendaResource {
 
     @Context
@@ -57,33 +59,36 @@ public class VendaResource {
         return Response.created(uri)
                 .entity(retorno)
                 .build();
+
+
     }
 
     @GET
     @Path("{id}")
-    public Response listarVenda(@PathParam("id") int id) {
+    public Response listarVenda(@PathParam("id") int id,@Context UriInfo info) {
         Venda retorno = service.vendaCom(id);
 
         if (retorno == null) {
             String mensagem = "{ \"msg\": \"resource not found\"}";
             return Response.status(Response.Status.NOT_FOUND).entity(mensagem).build();
         }
+
+        VendaSimple venda = new VendaSimple(retorno, info);
         return Response.ok()
-                .entity(retorno)
+                .entity(venda)
                 .build();
     }
 
 //    @GET
-    @Path("{id}/produtos")
+    @Path("{idVenda}/produtos")
     public ProdutoDaVendaSubResource produtosDaVenda() {
         return resourceContext.getResource(ProdutoDaVendaSubResource.class);
     }
-    
+
     @Path("{id}/cliente")
     public ClienteVendaSubResource clienteDaVenda() {
         return resourceContext.getResource(ClienteVendaSubResource.class);
     }
-
 //    @PUT
 //    @Path("{id}/produtos/{idProduto}")
 //    public ProdutoDaVendaSubResource adicionarProdutoAVenda() {
