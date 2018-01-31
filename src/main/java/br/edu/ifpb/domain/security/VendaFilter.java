@@ -1,10 +1,14 @@
 package br.edu.ifpb.domain.security;
 
+import br.edu.ifpb.domain.service.Users;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.StringTokenizer;
+import javax.enterprise.inject.spi.CDI;
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +25,14 @@ import javax.ws.rs.ext.Provider;
 //@PreMatching
 public class VendaFilter implements ContainerRequestFilter {
 
+    private final Users users;
+
+    public VendaFilter() throws NamingException {
+        String name = "java:global/${rootArtifactId}/Users";
+        this.users = (Users) new InitialContext()
+                .lookup(name);
+    }
+    
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         boolean contains = requestContext.getUriInfo().getPath().contains("venda");
